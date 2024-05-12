@@ -17,6 +17,7 @@
         v-model="taskContent"
         autofocus
         @keydown.enter="addTask()"
+        ref="input"
       />
       <div class="add-remove-all">
         <button
@@ -92,6 +93,7 @@ export default {
         });
         this.addTaskTolocalStorage();
         this.taskContent = "";
+        this.$refs.input.focus();
       }
     },
     addTaskTolocalStorage() {
