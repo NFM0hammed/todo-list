@@ -92,7 +92,6 @@ export default {
         });
         this.addTaskTolocalStorage();
         this.taskContent = "";
-        document.querySelector("input").focus();
       }
     },
     addTaskTolocalStorage() {
