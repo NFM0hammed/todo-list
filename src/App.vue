@@ -16,7 +16,7 @@
         placeholder="Add Task"
         v-model="taskContent"
         autofocus
-        @keydown="$event.key === 'Enter' ? addTask() : false"
+        @keydown.enter="addTask()"
       />
       <div class="add-remove-all">
         <button
