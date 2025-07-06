@@ -1,5 +1,4 @@
-![todolist-1](https://github.com/NFM0hammed/todo-list/assets/112784754/24b0229f-44ab-4325-9c40-81d9e394e52e)
-![todolist-2](https://github.com/NFM0hammed/todo-list/assets/112784754/3f770f5b-8736-469e-ad0b-78f8829ef448)
+<img width="727" height="780" alt="Image" src="https://github.com/user-attachments/assets/5a7a1e62-c9fe-40ff-8dc9-e8e157df40b4" />
 
 # todolist
 
