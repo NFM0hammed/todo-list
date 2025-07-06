@@ -6,7 +6,7 @@
         Tasks<span class="all-tasks">{{ tasks.length }}</span>
       </h4>
       <h4>
-        Completed<span class="complete-tasks">{{ tasksDone }}</span>
+        Completed<span class="complete-tasks">{{ numbersOfTasksDone }}</span>
       </h4>
     </div>
     <!-- Add Task to the Page -->
@@ -35,9 +35,9 @@
       </div>
     </div>
     <!-- Show Message if there's no Task -->
-    <div class="no-task" v-if="this.tasks.length < 1">There's no Task !</div>
+    <div class="no-task" v-if="tasks.length < 1">There's no Task !</div>
     <!-- Show all Tasks on the Page -->
-    <div class="task" v-for="(task, i) in tasks" :key="i" :id="task.id">
+    <div class="task" v-for="(task, i) in tasks" :key="task.id" :id="task.id">
       <div
         class="the-task"
         :style="task.done ? 'text-decoration: line-through' : ''"
@@ -66,26 +66,16 @@ export default {
   data: function () {
     return {
       tasks: [],
-      tasksDone: 0,
       taskContent: "",
     };
   },
   created() {
     this.getTasksFromLocalStorage();
-    this.numbersOfTasksDone;
   },
   methods: {
     addTask() {
-      let count = 0;
-      // Check if the element is an space
-      this.taskContent.split("").forEach((ele) => {
-        if (ele == " ") {
-          count++;
-        }
-      });
-
       // Minimum 1 chars [ Not space ]
-      if (this.taskContent != "" && count != this.taskContent.length) {
+      if (this.taskContent.trim() !== '') {
         this.tasks.push({
           id: Date.now(),
           theTask: this.taskContent,
@@ -106,13 +96,9 @@ export default {
     },
     removeAllTasksFromLocalStorage() {
       this.tasks = [];
-      this.tasksDone = 0;
       localStorage.removeItem("data");
     },
-    removeSpecificTaskFromLocalStorage(id, task) {
-      if (task) {
-        this.tasksDone--;
-      }
+    removeSpecificTaskFromLocalStorage(id) {
       this.tasks = this.tasks.filter((ele) => ele.id != id);
       this.addTaskTolocalStorage();
       if (this.tasks.length === 0) {
@@ -123,17 +109,11 @@ export default {
       task.done = !task.done;
       this.tasks[i].done = task.done;
       this.addTaskTolocalStorage();
-      task.done ? this.tasksDone++ : this.tasksDone--;
     },
   },
   computed: {
     numbersOfTasksDone() {
-      this.tasks.forEach((ele) => {
-        if (ele.done) {
-          this.tasksDone++;
-        }
-      });
-      return this.tasksDone;
+      return this.tasks.filter(task => task.done).length;
     },
   },
 };
@@ -228,6 +208,7 @@ body {
   margin: auto;
   border-radius: $borderRadius;
   padding: 20px;
+  box-shadow: 0px 0px 2px 0px #ddd;
 
   .add-task {
     display: flex;
